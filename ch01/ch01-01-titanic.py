@@ -219,3 +219,7 @@ pred_lr = model_lr.predict_proba(test_x2)[:, 1]
 # 予測値の加重平均をとる
 pred = pred_xgb * 0.8 + pred_lr * 0.2
 pred_label = np.where(pred > 0.5, 1, 0)
+
+# 提出用ファイルの作成
+submission = pd.DataFrame({'PassengerId': test['PassengerId'], 'Survived': pred_label})
+submission.to_csv('submission_2nd.csv', index=False)
